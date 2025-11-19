@@ -1,6 +1,19 @@
- - name: Install packages
-   apt: 
-     name:
-       - htop
-       - mc
-       - tmux 
+---
+- name: install base packages on Debian/Ubuntu
+  apt:
+    name:
+      - git
+      - vim
+      - curl
+    state: present
+    update_cache: yes
+  when: ansible_os_family == "Debian"
+
+- name: install base packages on RHEL/CentOS
+  yum:
+    name:
+      - git
+      - vim
+      - curl
+    state: present
+  when: ansible_os_family == "RedHat"
